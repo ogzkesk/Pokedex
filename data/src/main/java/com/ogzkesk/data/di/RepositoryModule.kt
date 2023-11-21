@@ -1,7 +1,9 @@
 package com.ogzkesk.data.di
 
-import com.ogzkesk.data.repository.pref.DataRepository
-import com.ogzkesk.data.repository.pref.DatastoreRepositoryImpl
+import com.ogzkesk.data.repository.PokedexRepository
+import com.ogzkesk.data.repository.PokedexRepositoryImpl
+import com.ogzkesk.data.repository.pref.PreferencesRepository
+import com.ogzkesk.data.repository.pref.PreferencesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,8 +17,14 @@ interface RepositoryModule {
     @Binds
     @ViewModelScoped
     fun bindPreferencesRepository(
-        datastoreRepositoryImpl: DatastoreRepositoryImpl
-    ) : DataRepository
+        preferencesRepositoryImpl: PreferencesRepositoryImpl,
+    ): PreferencesRepository
 
+
+    @Binds
+    @ViewModelScoped
+    fun bindPokedexRepository(
+        pokedexRepositoryImpl: PokedexRepositoryImpl,
+    ): PokedexRepository
 
 }

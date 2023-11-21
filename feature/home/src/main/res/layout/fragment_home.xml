@@ -1,26 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_light_primary"
     android:orientation="vertical"
     tools:context=".HomeFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/md_theme_light_primary"
+        android:orientation="vertical"
+        android:padding="@dimen/medium_plus">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:id="@+id/btn_settings"
-        android:text="Go To Settings"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:layout_height="wrap_content"/>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="@color/md_theme_light_primary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:id="@+id/btn_follow_system"
-        android:text="Follow System Ui Mode"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:layout_height="wrap_content"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-</LinearLayout>
+
+                <ImageView
+                    android:contentDescription="@string/logo"
+                    android:id="@+id/image_logo"
+                    android:layout_width="@dimen/large_plus"
+                    android:layout_height="@dimen/large_plus"
+                    android:layout_margin="@dimen/small"
+                    android:src="@drawable/pokeball"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/TextAppearance.Material3.HeadlineLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/medium"
+                    android:text="@string/pokedex"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/image_logo"
+                    app:layout_constraintStart_toEndOf="@id/image_logo"
+                    app:layout_constraintTop_toTopOf="@id/image_logo"
+                    app:layout_goneMarginStart="@dimen/small" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_search"
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="@dimen/medium_plus"
+                    android:layout_marginEnd="@dimen/medium_plus"
+                    android:layout_weight="1"
+                    app:boxBackgroundColor="@color/white"
+                    app:boxCornerRadiusBottomEnd="@dimen/large"
+                    app:boxCornerRadiusBottomStart="@dimen/large"
+                    app:boxCornerRadiusTopEnd="@dimen/large"
+                    app:boxCornerRadiusTopStart="@dimen/large"
+                    app:boxStrokeWidth="@dimen/def"
+                    app:boxStrokeWidthFocused="@dimen/def"
+                    app:endIconDrawable="@drawable/clear"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/md_theme_light_primary"
+                    app:layout_constraintEnd_toStartOf="@id/btn_sort"
+                    app:layout_constraintStart_toStartOf="@id/image_logo"
+                    app:layout_constraintTop_toBottomOf="@id/image_logo"
+                    app:startIconDrawable="@drawable/search"
+                    app:startIconTint="@color/md_theme_light_primary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/search"
+                        android:textColorHint="@color/hint_color" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btn_sort"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/kare"
+                    android:contentDescription="@string/sort"
+                    app:iconTint="@color/md_theme_light_primary"
+                    app:layout_constraintBottom_toBottomOf="@id/input_layout_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/input_layout_search"
+                    app:backgroundTint="@color/white" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.cardview.widget.CardView
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/small"
+            app:cardCornerRadius="@dimen/medium_plus">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="@dimen/small"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:listitem="@layout/rv_item_card" />
+
+        </androidx.cardview.widget.CardView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

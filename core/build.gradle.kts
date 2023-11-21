@@ -43,11 +43,13 @@ android {
 dependencies {
 
 
+    implementation(libs.material)
     implementation(libs.bundles.coroutines)
     implementation(libs.bundles.androidx)
     implementation(libs.timber)
     implementation(libs.hilt)
     implementation(libs.data.store)
+    implementation(libs.retrofit)
 
     kapt(libs.hilt.compiler)
 

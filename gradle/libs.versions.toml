@@ -10,12 +10,12 @@ gradlePlugin = "3.4.3"
 crashlyticsGradle = "2.9.9"
 googleServices = "4.3.15"
 
-firebaseBom = "32.3.1"
+firebaseBom = "32.6.0"
 androidxCore = "1.12.0"
 constraintLayout = "2.1.4"
-fragmentKtx = "1.6.1"
+fragmentKtx = "1.6.2"
 activityKtx = "1.8.0"
-navigation = "2.7.4"
+navigation = "2.7.5"
 palette = "1.0.0"
 splash = "1.0.1"
 appcompat = "1.6.1"
@@ -28,11 +28,11 @@ testAndroidxEspresso = "3.5.1"
 
 eonad = "1.0.8"
 javaxInject = "1"
-hilt = "2.48"
+hilt = "2.48.1"
 accompanist = "0.32.0"
 coroutines = "1.7.3"
 timber = "5.0.1"
-coil = "2.4.0"
+coil = "2.5.0"
 dataStore = "1.0.0"
 retrofit = "2.9.0"
 okHttp = "5.0.0-alpha.2"
@@ -86,7 +86,8 @@ kotlinx-immutable-collections = { module = "org.jetbrains.kotlinx:kotlinx-collec
 javax-inject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber"}
 eon-ad = { module = "com.github.ogzkesk:EonAd", version.ref = "eonad" }
-coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-kt" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }

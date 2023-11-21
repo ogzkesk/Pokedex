@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="def">0dp</dimen>
+    <dimen name="extra_small">2dp</dimen>
+    <dimen name="small">4dp</dimen>
+    <dimen name="medium">8dp</dimen>
+    <dimen name="medium_plus">16dp</dimen>
+    <dimen name="large">24dp</dimen>
+    <dimen name="large_plus">32dp</dimen>
+    <dimen name="extra_large">48dp</dimen>
+    <dimen name="page_small">64dp</dimen>
+    <dimen name="page_medium">100dp</dimen>
+    <dimen name="page_large">128dp</dimen>
+</resources>

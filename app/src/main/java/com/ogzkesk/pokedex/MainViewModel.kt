@@ -1,7 +1,7 @@
 package com.ogzkesk.pokedex
 
 import androidx.lifecycle.ViewModel
-import com.ogzkesk.core.base.di.IODispatcher
+import com.ogzkesk.core.di.IODispatcher
 import com.ogzkesk.domain.PreferencesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
