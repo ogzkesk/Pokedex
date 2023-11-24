@@ -1,12 +1,11 @@
-package com.ogzkesk.home
+package com.ogzkesk.home.content
 
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.RadioButton
+import com.ogzkesk.home.R
 
 class SortDialog(context: Context): Dialog(context) {
 
@@ -16,7 +15,7 @@ class SortDialog(context: Context): Dialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.sort_dialog_layout)
+        setContentView(R.layout.layout_sort_dialog)
 
         radioName = findViewById(R.id.rb_name)
         radioNumber = findViewById(R.id.rb_number)
@@ -26,8 +25,8 @@ class SortDialog(context: Context): Dialog(context) {
     }
 
     fun showDialog(onDialogClicked: (SortType) -> Unit){
-
         show()
+
         radioName.isChecked = selectedRadio == SortType.NAME
         radioNumber.isChecked = selectedRadio == SortType.NUMBER
 
@@ -42,9 +41,5 @@ class SortDialog(context: Context): Dialog(context) {
             onDialogClicked(SortType.NUMBER)
             dismiss()
         }
-    }
-
-    enum class SortType{
-        NUMBER,NAME
     }
 }

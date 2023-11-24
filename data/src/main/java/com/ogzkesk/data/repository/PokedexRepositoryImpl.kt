@@ -16,20 +16,19 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+
 class PokedexRepositoryImpl @Inject constructor(
     private val service: PokedexService,
-    private val pokemonsDTOMapper: Mapper<PokemonsDTO, PokemonsModel>,
-    private val pokemonDTOMapper: Mapper<PokemonDTO,PokemonModel>,
+    private val pokemonsDTOMapper: Mapper<PokemonsDTO,PokemonsModel>,
+    private val pokemonDTOMapper: Mapper<PokemonDTO, PokemonModel>,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : PokedexRepository {
 
-    override fun fetchPokemons(limit: Int, offset: Int): Flow<Resource<PokemonsModel>> {
-
-        return safeApiCall(ioDispatcher, pokemonsDTOMapper, service::fetchPokemons)
+    override suspend fun fetchPokemons(pos: Int, pageSize: Int): PokemonsModel {
+        return pokemonsDTOMapper(service.fetchPokemons(pos,pageSize))
     }
 
     override fun fetchPokemonById(id: Int): Flow<Resource<PokemonModel>> {
-
         return safeApiCall(ioDispatcher) {
             coroutineScope {
                 val pokemon = async { service.fetchPokemon(id) }.await()
@@ -39,7 +38,7 @@ class PokedexRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun mapEntries(entries: List<Entry>?) : String {
+    private fun mapEntries(entries: List<Entry>?): String {
         return entries?.map { it.text ?: "" }?.random() ?: ""
     }
 }

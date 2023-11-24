@@ -14,8 +14,8 @@ interface PokedexService {
 
     @GET("pokemon")
     suspend fun fetchPokemons(
-        @Query("limit") limit: Int = LIMIT,
-        @Query("offset") offset: Int = OFFSET,
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int,
     ) : PokemonsDTO
 
 

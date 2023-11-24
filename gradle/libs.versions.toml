@@ -14,7 +14,7 @@ firebaseBom = "32.6.0"
 androidxCore = "1.12.0"
 constraintLayout = "2.1.4"
 fragmentKtx = "1.6.2"
-activityKtx = "1.8.0"
+activityKtx = "1.8.1"
 navigation = "2.7.5"
 palette = "1.0.0"
 splash = "1.0.1"
@@ -27,6 +27,7 @@ testAndroidxJunit = "1.1.5"
 testAndroidxEspresso = "3.5.1"
 
 eonad = "1.0.8"
+paging = "3.2.1"
 javaxInject = "1"
 hilt = "2.48.1"
 accompanist = "0.32.0"
@@ -58,7 +59,7 @@ androidx-navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", ver
 androidx-navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation"}
 androidx-palette = { module = "androidx.palette:palette-ktx", version.ref = "palette"}
 androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "splash"}
-
+androidx-paging = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging"}
 
 lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
@@ -104,6 +105,7 @@ firebase-appcheck = { module = "com.google.firebase:firebase-appcheck-ktx" }
 gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "gradlePlugin" }
 gradle-kotlin-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle-hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+androidx-paging-common-ktx = { group = "androidx.paging", name = "paging-common-ktx", version = "3.2.1" }
 
 
 [bundles]

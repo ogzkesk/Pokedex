@@ -17,15 +17,26 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
+import java.io.IOException
+
+private const val CONNECTION_ERROR = "Please check your internet connection"
 
 fun <I, O> Flow<I>.asResource(mapper: Mapper<I, O>): Flow<Resource<O>> {
     return map<I, Resource<O>> { Resource.Success(mapper(it)) }
         .onStart { emit(Resource.Loading) }
         .catch { e ->
-            if(e is HttpException){
-                emit(Resource.Error(Throwable(e.message())))
-            } else {
-                emit(Resource.Error(e))
+            when (e) {
+                is HttpException -> {
+                    emit(Resource.Error(Throwable(e.message())))
+                }
+
+                is IOException -> {
+                    emit(Resource.Error(Throwable(CONNECTION_ERROR)))
+                }
+
+                else -> {
+                    emit(Resource.Error(e))
+                }
             }
         }
 }
@@ -45,10 +56,18 @@ fun <T> Flow<T>.asResource(): Flow<Resource<T>> {
     return map<T, Resource<T>> { Resource.Success(it) }
         .onStart { emit(Resource.Loading) }
         .catch { e ->
-            if(e is HttpException){
-                emit(Resource.Error(Throwable(e.message())))
-            } else {
-                emit(Resource.Error(e))
+            when (e) {
+                is HttpException -> {
+                    emit(Resource.Error(Throwable(e.message())))
+                }
+
+                is IOException -> {
+                    emit(Resource.Error(Throwable(CONNECTION_ERROR)))
+                }
+
+                else -> {
+                    emit(Resource.Error(e))
+                }
             }
         }
 }
@@ -63,27 +82,25 @@ fun <T> safeApiCall(
         .asResource()
 }
 
-inline fun <F : Fragment,T: Any> F.collectFlowWithLifeCycle(
+inline fun <F : Fragment, T : Any> F.collectFlowWithLifeCycle(
     flow: Flow<T>,
-    dispatcher: CoroutineDispatcher = Dispatchers.Main,
-    state : Lifecycle.State = Lifecycle.State.STARTED,
+    state: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline block: suspend (T) -> Unit,
 ) {
-    viewLifecycleOwner.lifecycleScope.launch(dispatcher) {
-        flow.flowWithLifecycle(viewLifecycleOwner.lifecycle,state).collect {
+    viewLifecycleOwner.lifecycleScope.launch {
+        flow.flowWithLifecycle(viewLifecycleOwner.lifecycle, state).collect {
             block(it)
         }
     }
 }
 
-inline fun <A : AppCompatActivity,T: Any> A.collectFlowWithLifeCycle(
+inline fun <A : AppCompatActivity, T : Any> A.collectFlowWithLifeCycle(
     flow: Flow<T>,
-    dispatcher: CoroutineDispatcher = Dispatchers.Main,
-    state : Lifecycle.State = Lifecycle.State.STARTED,
+    state: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline block: suspend (T) -> Unit,
 ) {
-    lifecycleScope.launch(dispatcher) {
-        flow.flowWithLifecycle(lifecycle,state).collect {
+    lifecycleScope.launch {
+        flow.flowWithLifecycle(lifecycle, state).collect {
             block(it)
         }
     }

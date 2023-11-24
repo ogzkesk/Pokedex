@@ -1,21 +1,31 @@
 package com.ogzkesk.home
 
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
+import androidx.paging.filter
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.ogzkesk.core.base.BaseFragment
 import com.ogzkesk.core.ext.NavArg
-import com.ogzkesk.core.ext.collectFlowWithLifeCycle
-import com.ogzkesk.core.ext.navigateWithSlide
-import com.ogzkesk.core.ui.CustomDialog
-import com.ogzkesk.home.adapter.HomeListAdapter
+import com.ogzkesk.core.ext.navigateWithFade
+import com.ogzkesk.home.adapter.HomePagingDataAdapter
+import com.ogzkesk.home.content.SortDialog
 import com.ogzkesk.home.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 private const val POKEMON_NAME_KEY = "pokemon_name"
+private const val RV_ITEM_TYPE_GRID = 0
+private const val RV_ITEM_TYPE_LINEAR = 1
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
@@ -23,75 +33,87 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 ) {
 
     override val viewModel: HomeViewModel by viewModels()
-    private lateinit var listAdapter: HomeListAdapter
-
-    // TODO fix checked radios.
-    // TODO fix recycler not in center.
-    // TODO find search api or search from list.
-    // TODO fix searchBar hint.
-    // TODO then go details screen without viewPager.
-    // TODO then implement pagination maybe
+    private lateinit var pagingAdapter: HomePagingDataAdapter
+    private val imm by lazy { getSystemService(requireContext(), InputMethodManager::class.java) }
     private val sortDialog by lazy { SortDialog(requireContext()) }
 
     override fun onInitialize() {
         initAdapter()
         initUI()
-        observeEvents()
-        observeData()
     }
 
-    private fun observeData() {
-        collectFlowWithLifeCycle(viewModel.pokemons) { data ->
-            listAdapter.submitList(data.results)
+    private fun initAdapter() {
+        pagingAdapter = HomePagingDataAdapter()
+        pagingAdapter.setOnItemClickListener {
+            findNavController().navigateWithFade(
+                com.ogzkesk.core.R.string.route_details, NavArg(POKEMON_NAME_KEY, it)
+            )
+        }
+
+        initAdapterStates()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.pagingFlow.collect { data ->
+                pagingAdapter.submitData(viewLifecycleOwner.lifecycle, data)
+            }
         }
     }
 
-    private fun observeEvents() {
-        val customDialog = CustomDialog(requireContext())
-        collectFlowWithLifeCycle(viewModel.event) { event ->
-            when (event) {
-                is HomeEvent.Error -> {
-                    customDialog.dismiss()
-                    customDialog.showError(event.message)
-                }
 
-                HomeEvent.Loading -> {
-                    println("homeEvent LOADING ..........")
-                    customDialog.showProgress()
-                }
+    private fun initAdapterStates() {
 
-                HomeEvent.Success -> {
-                    customDialog.dismiss()
+        pagingAdapter.addLoadStateListener { state ->
+            binding.layoutRefresh.apply {
+
+                val refresh = state.refresh
+                progress.isVisible = refresh is LoadState.Loading
+                tvError.isVisible = refresh is LoadState.Error
+                btnRetry.isVisible = refresh is LoadState.Error
+
+                if (refresh is LoadState.Error) {
+                    tvError.text = refresh.error.message
+                    btnRetry.setOnClickListener { pagingAdapter.retry() }
                 }
             }
         }
     }
 
-    private fun initAdapter() {
-        listAdapter = HomeListAdapter()
-        listAdapter.setOnClickListener { pokemon ->
-            findNavController().navigateWithSlide(
-                com.ogzkesk.core.R.string.route_details,
-                NavArg(POKEMON_NAME_KEY, pokemon.name)
-            )
-        }
-    }
 
     private fun initUI() = with(binding) {
-        rvHome.adapter = listAdapter
-        rvHome.setHasFixedSize(true)
+
+        rvHome.adapter = pagingAdapter.withLoadStateFooter(
+            footer = pagingAdapter.footerStateAdapter
+        )
+
+        rvHome.layoutManager = GridLayoutManager(requireContext(), 3).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (rvHome.adapter?.getItemViewType(position)) {
+                        RV_ITEM_TYPE_GRID -> 1
+                        RV_ITEM_TYPE_LINEAR -> 3
+                        else -> 1
+                    }
+                }
+            }
+        }
+
 
         tvSearch.doAfterTextChanged { edt ->
-            edt?.let { editable ->
-                viewLifecycleOwner.lifecycleScope.launch {
-                    delay(1000)
-                    viewModel.onSearch(editable.toString())
-                }
+            if (edt == null) return@doAfterTextChanged
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                delay(500)
+                viewModel.onSearch(edt.toString())
             }
         }
 
         btnSort.setOnClickListener {
-            SortDialog(requireContext()).showDialog(viewModel::onSortTypeChanged)
+            sortDialog.showDialog(viewModel::onSortTypeChanged)
+        }
+
+        inputLayoutSearch.setEndIconOnClickListener {
+            tvSearch.setText("")
+            tvSearch.clearFocus()
+            imm?.hideSoftInputFromWindow(binding.tvSearch.windowToken, 0)
         }
     }
 }

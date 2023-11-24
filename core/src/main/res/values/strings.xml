@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name">Pokedex</string>
     <string name="route_details">details_fragment</string>
     <string name="route_home">home_fragment</string>
     <string name="share_with">Share with ..</string>

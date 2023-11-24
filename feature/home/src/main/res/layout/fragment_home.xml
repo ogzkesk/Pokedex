@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/md_theme_light_primary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -27,11 +27,11 @@
 
 
                 <ImageView
-                    android:contentDescription="@string/logo"
                     android:id="@+id/image_logo"
                     android:layout_width="@dimen/large_plus"
                     android:layout_height="@dimen/large_plus"
                     android:layout_margin="@dimen/small"
+                    android:contentDescription="@string/logo"
                     android:src="@drawable/pokeball"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -55,10 +55,11 @@
                     android:id="@+id/input_layout_search"
                     style="@style/Widget.Material3.TextInputLayout.FilledBox"
                     android:layout_width="0dp"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="@dimen/medium_plus"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large"
                     android:layout_marginEnd="@dimen/medium_plus"
                     android:layout_weight="1"
+                    android:gravity="center"
                     app:boxBackgroundColor="@color/white"
                     app:boxCornerRadiusBottomEnd="@dimen/large"
                     app:boxCornerRadiusBottomStart="@dimen/large"
@@ -77,10 +78,12 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tv_search"
+                        style="@style/Pokedex.BodySmall"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/search"
-                        android:textColorHint="@color/hint_color" />
+                        android:maxLines="1" />
+
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,13 +92,13 @@
                     style="@style/Widget.Material3.Button.IconButton.Filled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:icon="@drawable/kare"
                     android:contentDescription="@string/sort"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/kare"
                     app:iconTint="@color/md_theme_light_primary"
                     app:layout_constraintBottom_toBottomOf="@id/input_layout_search"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/input_layout_search"
-                    app:backgroundTint="@color/white" />
+                    app:layout_constraintTop_toTopOf="@id/input_layout_search" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -104,23 +107,26 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-        <androidx.cardview.widget.CardView
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small"
+        app:cardCornerRadius="@dimen/medium_plus"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/small"
-            app:cardCornerRadius="@dimen/medium_plus">
+            android:padding="@dimen/small"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/rv_item_card" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_home"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:padding="@dimen/small"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="3"
-                tools:listitem="@layout/rv_item_card" />
+        <include
+            android:id="@+id/layout_refresh"
+            layout="@layout/layout_refresh" />
 
-        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
