@@ -16,29 +16,32 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+private const val ENTRY_LANGUAGE = "en"
 
 class PokedexRepositoryImpl @Inject constructor(
     private val service: PokedexService,
-    private val pokemonsDTOMapper: Mapper<PokemonsDTO,PokemonsModel>,
+    private val pokemonsDTOMapper: Mapper<PokemonsDTO, PokemonsModel>,
     private val pokemonDTOMapper: Mapper<PokemonDTO, PokemonModel>,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : PokedexRepository {
 
     override suspend fun fetchPokemons(pos: Int, pageSize: Int): PokemonsModel {
-        return pokemonsDTOMapper(service.fetchPokemons(pos,pageSize))
+        return pokemonsDTOMapper(service.fetchPokemons(pos, pageSize))
     }
 
-    override fun fetchPokemonById(id: Int): Flow<Resource<PokemonModel>> {
+    override fun fetchPokemonByName(name: String): Flow<Resource<PokemonModel>> {
         return safeApiCall(ioDispatcher) {
             coroutineScope {
-                val pokemon = async { service.fetchPokemon(id) }.await()
-                val species = async { service.fetchPokemonInfo(id) }.await()
+                val pokemon = async { service.fetchPokemon(name) }.await()
+                val species = async { service.fetchPokemonInfo(name) }.await()
                 pokemonDTOMapper(pokemon).copy(info = mapEntries(species.entries))
             }
         }
     }
 
     private fun mapEntries(entries: List<Entry>?): String {
-        return entries?.map { it.text ?: "" }?.random() ?: ""
+        return entries?.filter { it.language.name == ENTRY_LANGUAGE }
+            ?.map { it.text }
+            ?.random() ?: ""
     }
 }

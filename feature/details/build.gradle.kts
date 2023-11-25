@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.androidx.splash)
     implementation(libs.timber)
     implementation(libs.hilt)
+    implementation(libs.coil)
+    implementation(libs.coil.svg)
 
     kapt(libs.hilt.compiler)
 

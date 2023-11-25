@@ -82,7 +82,7 @@ fun <T> safeApiCall(
         .asResource()
 }
 
-inline fun <F : Fragment, T : Any> F.collectFlowWithLifeCycle(
+inline fun <F : Fragment, T : Any?> F.collectFlowWithLifeCycle(
     flow: Flow<T>,
     state: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline block: suspend (T) -> Unit,
@@ -94,7 +94,7 @@ inline fun <F : Fragment, T : Any> F.collectFlowWithLifeCycle(
     }
 }
 
-inline fun <A : AppCompatActivity, T : Any> A.collectFlowWithLifeCycle(
+inline fun <A : AppCompatActivity, T : Any?> A.collectFlowWithLifeCycle(
     flow: Flow<T>,
     state: Lifecycle.State = Lifecycle.State.STARTED,
     crossinline block: suspend (T) -> Unit,

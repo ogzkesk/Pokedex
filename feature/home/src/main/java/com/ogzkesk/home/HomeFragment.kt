@@ -8,22 +8,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.ogzkesk.core.base.BaseFragment
 import com.ogzkesk.core.ext.NavArg
-import com.ogzkesk.core.ext.navigateWithFade
+import com.ogzkesk.core.ext.collectFlowWithLifeCycle
+import com.ogzkesk.core.ext.navigateWithSlide
+import com.ogzkesk.core.util.Constants.POKEMON_NAME_KEY
 import com.ogzkesk.home.adapter.HomePagingDataAdapter
 import com.ogzkesk.home.content.SortDialog
 import com.ogzkesk.home.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-private const val POKEMON_NAME_KEY = "pokemon_name"
 private const val RV_ITEM_TYPE_GRID = 0
 private const val RV_ITEM_TYPE_LINEAR = 1
 
@@ -45,16 +42,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     private fun initAdapter() {
         pagingAdapter = HomePagingDataAdapter()
         pagingAdapter.setOnItemClickListener {
-            findNavController().navigateWithFade(
-                com.ogzkesk.core.R.string.route_details, NavArg(POKEMON_NAME_KEY, it)
+            findNavController().navigateWithSlide(
+                com.ogzkesk.core.R.string.route_details, NavArg(POKEMON_NAME_KEY, it?.lowercase())
             )
         }
 
         initAdapterStates()
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.pagingFlow.collect { data ->
-                pagingAdapter.submitData(viewLifecycleOwner.lifecycle, data)
-            }
+
+        collectFlowWithLifeCycle(viewModel.pagingFlow) { data ->
+            pagingAdapter.submitData(viewLifecycleOwner.lifecycle, data)
         }
     }
 

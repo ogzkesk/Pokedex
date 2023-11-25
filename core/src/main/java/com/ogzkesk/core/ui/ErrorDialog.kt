@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ogzkesk.core.R
 
-internal class ErrorDialog(private val context: Context) {
+class ErrorDialog(private val context: Context) {
 
     fun show(message: String,onConfirm: () -> Unit){
         val dialog = MaterialAlertDialogBuilder(context)

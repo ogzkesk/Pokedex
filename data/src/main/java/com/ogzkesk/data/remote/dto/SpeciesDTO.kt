@@ -7,5 +7,10 @@ data class SpeciesDTO(
 )
 
 data class Entry(
-    @SerializedName("flavor_text") val text: String?
+    @SerializedName("flavor_text") val text: String?,
+    @SerializedName("language") val language: Language
+)
+
+data class Language(
+    @SerializedName("name") val name: String,
 )

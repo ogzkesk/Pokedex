@@ -24,7 +24,7 @@ class HomeViewModel @Inject constructor(
     private val fetchPokemons: FetchPokemonsUseCase,
 ) : ViewModel() {
 
-    private val transformer = MutableStateFlow(Pair(SortType.NAME, ""))
+    private val transformer = MutableStateFlow(Pair(SortType.NUMBER, ""))
 
     private val _pagingFlow = MutableStateFlow<PagingData<ResultModel>>(PagingData.empty())
     val pagingFlow: StateFlow<PagingData<ResultModel>> get() = _pagingFlow
@@ -32,7 +32,6 @@ class HomeViewModel @Inject constructor(
     fun onSearch(query: String) {
         transformer.update { it.copy(second = query) }
     }
-
 
     fun onSortTypeChanged(type: SortType) {
         transformer.update { it.copy(first = type) }

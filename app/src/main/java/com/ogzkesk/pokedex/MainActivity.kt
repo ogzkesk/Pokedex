@@ -1,10 +1,14 @@
 package com.ogzkesk.pokedex
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowInsets
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.ogzkesk.core.R
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.ogzkesk.core.connection.NetworkDialog
 import com.ogzkesk.core.connection.NetworkObserver
 import com.ogzkesk.core.ext.collectFlowWithLifeCycle
@@ -13,31 +17,29 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-//        setSystemBars()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        enableEdgeToEdge(
+            SystemBarStyle.dark(Color.TRANSPARENT),
+            SystemBarStyle.dark(Color.TRANSPARENT)
+        )
+
         observeConnection()
     }
 
-//    private fun setSystemBars(){
-//        val systemBarStyle = SystemBarStyle.dark(getColor(R.color.md_theme_light_primary))
-//        enableEdgeToEdge(systemBarStyle,systemBarStyle)
-//    }
-
     private fun observeConnection() {
-        collectFlowWithLifeCycle(NetworkObserver(this).observe()){
+        collectFlowWithLifeCycle(NetworkObserver(this).observe()) {
             if (it.not()) {
-                withContext(Dispatchers.Main) {
-                    NetworkDialog(this@MainActivity).show {}
-                }
+                NetworkDialog(this@MainActivity).show {}
             }
         }
     }
