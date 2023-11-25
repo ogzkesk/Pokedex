@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 class NetworkObserver(context: Context) {
 
     private val cm = context.getSystemService<ConnectivityManager>()
-    val hasActiveNetwork = cm?.activeNetwork
 
     fun observe(): Flow<Boolean> {
         return callbackFlow {
