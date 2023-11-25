@@ -9,11 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.ogzkesk.core.base.BaseFragment
-import com.ogzkesk.core.ext.NavArg
-import com.ogzkesk.core.ext.collectFlowWithLifeCycle
-import com.ogzkesk.core.ext.navigateWithSlide
-import com.ogzkesk.core.util.Constants.POKEMON_NAME_KEY
+import com.ogzkesk.common.base.BaseFragment
+import com.ogzkesk.common.ext.NavArg
+import com.ogzkesk.common.ext.collectFlowWithLifeCycle
+import com.ogzkesk.common.ext.navigateWithSlide
+import com.ogzkesk.common.util.Constants.POKEMON_NAME_KEY
 import com.ogzkesk.home.adapter.HomePagingDataAdapter
 import com.ogzkesk.home.content.SortDialog
 import com.ogzkesk.home.databinding.FragmentHomeBinding

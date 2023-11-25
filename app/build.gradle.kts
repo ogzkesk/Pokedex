@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+
     namespace = "com.ogzkesk.pokedex"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
@@ -19,6 +20,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {

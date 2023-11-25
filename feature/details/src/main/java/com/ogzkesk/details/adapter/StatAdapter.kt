@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
-import com.ogzkesk.core.model.PokemonStatsModel
+import com.ogzkesk.common.model.PokemonStatsModel
 import com.ogzkesk.details.databinding.LayoutStatBinding
 
 class StatAdapter : ListAdapter<PokemonStatsModel, StatViewHolder>(DiffUtil) {

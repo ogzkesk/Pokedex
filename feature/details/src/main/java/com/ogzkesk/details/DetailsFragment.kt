@@ -8,19 +8,18 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import coil.decode.SvgDecoder
 import coil.load
-import com.ogzkesk.core.R
-import com.ogzkesk.core.base.BaseFragment
-import com.ogzkesk.core.ext.collectFlowWithLifeCycle
-import com.ogzkesk.core.ext.getArgument
-import com.ogzkesk.core.model.PokemonModel
-import com.ogzkesk.core.ui.ErrorDialog
-import com.ogzkesk.core.util.Constants.POKEMON_NAME_KEY
+import com.ogzkesk.common.base.BaseFragment
+import com.ogzkesk.common.ext.collectFlowWithLifeCycle
+import com.ogzkesk.common.ext.getArgument
+import com.ogzkesk.common.model.PokemonModel
+import com.ogzkesk.common.ui.ErrorDialog
+import com.ogzkesk.common.util.Constants.POKEMON_NAME_KEY
 import com.ogzkesk.details.adapter.StatAdapter
 import com.ogzkesk.details.content.ColorModifier
 import com.ogzkesk.details.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.text.DecimalFormat
+import com.ogzkesk.core.R
 
 @AndroidEntryPoint
 class DetailsFragment : BaseFragment<FragmentDetailsBinding, DetailsViewModel>(

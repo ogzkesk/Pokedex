@@ -1,4 +1,4 @@
-package com.ogzkesk.core.util
+package com.ogzkesk.common.util
 
 object Constants {
 

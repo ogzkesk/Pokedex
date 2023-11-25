@@ -2,7 +2,7 @@ package com.ogzkesk.home.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.ogzkesk.core.model.ResultModel
+import com.ogzkesk.common.model.ResultModel
 import com.ogzkesk.domain.usecase.home.FetchPokemonsUseCase
 import com.ogzkesk.home.content.SortType
 import retrofit2.HttpException

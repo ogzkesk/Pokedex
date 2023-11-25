@@ -1,4 +1,4 @@
-package com.ogzkesk.core.model
+package com.ogzkesk.common.model
 
 
 data class PokemonsModel(

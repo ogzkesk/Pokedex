@@ -1,4 +1,4 @@
-package com.ogzkesk.core.ext
+package com.ogzkesk.common.ext
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.ogzkesk.core.util.Constants.DataStore.DATA_STORE
+import com.ogzkesk.common.util.Constants.DataStore.DATA_STORE
 
 fun Context.toAction(uri: Uri) {
     startActivity(Intent(Intent.ACTION_VIEW, uri))
@@ -70,6 +70,5 @@ fun Fragment.showSnackbar(
 fun String.capitalize(): String {
     return replaceFirstChar { it.uppercase() }
 }
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE)
 
 

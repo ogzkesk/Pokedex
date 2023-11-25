@@ -8,9 +8,9 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.ogzkesk.core.connection.NetworkObserver
-import com.ogzkesk.core.ext.collectFlowWithLifeCycle
-import com.ogzkesk.core.ui.NetworkDialog
+import com.ogzkesk.common.connection.NetworkObserver
+import com.ogzkesk.common.ext.collectFlowWithLifeCycle
+import com.ogzkesk.common.ui.NetworkDialog
 import com.ogzkesk.pokedex.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

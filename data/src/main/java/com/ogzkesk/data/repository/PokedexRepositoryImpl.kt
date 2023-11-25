@@ -1,11 +1,11 @@
 package com.ogzkesk.data.repository
 
-import com.ogzkesk.core.base.Mapper
-import com.ogzkesk.core.di.IODispatcher
-import com.ogzkesk.core.ext.safeApiCall
-import com.ogzkesk.core.model.PokemonModel
-import com.ogzkesk.core.model.PokemonsModel
-import com.ogzkesk.core.util.Resource
+import com.ogzkesk.common.base.Mapper
+import com.ogzkesk.common.di.IODispatcher
+import com.ogzkesk.common.ext.safeApiCall
+import com.ogzkesk.common.model.PokemonModel
+import com.ogzkesk.common.model.PokemonsModel
+import com.ogzkesk.common.util.Resource
 import com.ogzkesk.data.remote.PokedexService
 import com.ogzkesk.data.remote.dto.Entry
 import com.ogzkesk.data.remote.dto.PokemonDTO

@@ -1,16 +1,18 @@
-package com.ogzkesk.core.ui
+package com.ogzkesk.common.ui
 
 import android.content.Context
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.ogzkesk.core.R
 
-class ErrorDialog(private val context: Context) {
+class NetworkDialog(private val context: Context) {
 
-    fun show(message: String,onConfirm: () -> Unit){
+    fun show(onDialogClick: () -> Unit){
         val dialog = MaterialAlertDialogBuilder(context)
-            .setMessage(message)
+            .setIcon(R.drawable.ic_no_signal)
+            .setTitle(R.string.no_connection)
+            .setMessage(R.string.no_connection_desc)
             .setPositiveButton(R.string.ok) { dialogInterface, _ ->
-                onConfirm()
+                onDialogClick()
                 dialogInterface.dismiss()
             }
 

@@ -7,9 +7,9 @@ import android.graphics.Typeface
 import android.widget.LinearLayout
 import com.google.android.material.chip.Chip
 import com.google.android.material.shape.ShapeAppearanceModel
-import com.ogzkesk.core.ext.capitalize
-import com.ogzkesk.core.model.PokemonModel
-import com.ogzkesk.core.ui.PokemonColor
+import com.ogzkesk.common.ext.capitalize
+import com.ogzkesk.common.model.PokemonModel
+import com.ogzkesk.common.ui.PokemonColor
 import com.ogzkesk.details.databinding.FragmentDetailsBinding
 
 class ColorModifier(private val context: Context, private val binding: FragmentDetailsBinding) {

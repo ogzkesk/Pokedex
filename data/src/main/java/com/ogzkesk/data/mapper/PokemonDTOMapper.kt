@@ -1,12 +1,11 @@
 package com.ogzkesk.data.mapper
 
 import androidx.annotation.ColorRes
-import com.ogzkesk.core.R
-import com.ogzkesk.core.base.Mapper
-import com.ogzkesk.core.ext.capitalize
-import com.ogzkesk.core.model.PokemonModel
-import com.ogzkesk.core.model.PokemonStatsModel
-import com.ogzkesk.core.ui.PokemonColor
+import com.ogzkesk.common.base.Mapper
+import com.ogzkesk.common.ext.capitalize
+import com.ogzkesk.common.model.PokemonModel
+import com.ogzkesk.common.model.PokemonStatsModel
+import com.ogzkesk.common.ui.PokemonColor
 import com.ogzkesk.data.remote.dto.Ability
 import com.ogzkesk.data.remote.dto.PokemonDTO
 import com.ogzkesk.data.remote.dto.Stat
@@ -99,7 +98,7 @@ class PokemonDTOMapper @Inject constructor() : Mapper<PokemonDTO, PokemonModel> 
     }
 
     private fun mapColor(types: List<String>?): Int {
-        if (types.isNullOrEmpty()) return R.color.md_theme_light_primary
+        if (types.isNullOrEmpty()) return com.ogzkesk.core.R.color.md_theme_light_primary
         return PokemonColor.values().first {
             it.name == types.first().capitalize()
         }.color

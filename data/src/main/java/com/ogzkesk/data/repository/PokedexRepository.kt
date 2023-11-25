@@ -1,8 +1,8 @@
 package com.ogzkesk.data.repository
 
-import com.ogzkesk.core.model.PokemonModel
-import com.ogzkesk.core.util.Resource
-import com.ogzkesk.core.model.PokemonsModel
+import com.ogzkesk.common.model.PokemonModel
+import com.ogzkesk.common.util.Resource
+import com.ogzkesk.common.model.PokemonsModel
 import kotlinx.coroutines.flow.Flow
 
 interface PokedexRepository {

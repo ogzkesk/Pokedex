@@ -2,15 +2,13 @@ package com.ogzkesk.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ogzkesk.core.model.PokemonModel
-import com.ogzkesk.core.util.Constants.RANDOM_ERROR
-import com.ogzkesk.core.util.Resource
+import com.ogzkesk.common.model.PokemonModel
+import com.ogzkesk.common.util.Constants.RANDOM_ERROR
+import com.ogzkesk.common.util.Resource
 import com.ogzkesk.domain.usecase.detail.FetchPokemonByNameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update

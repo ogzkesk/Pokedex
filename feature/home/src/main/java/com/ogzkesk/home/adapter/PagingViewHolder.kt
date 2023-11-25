@@ -3,7 +3,7 @@ package com.ogzkesk.home.adapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.decode.SvgDecoder
 import coil.load
-import com.ogzkesk.core.model.ResultModel
+import com.ogzkesk.common.model.ResultModel
 import com.ogzkesk.home.databinding.RvItemCardBinding
 
 class PagingViewHolder(

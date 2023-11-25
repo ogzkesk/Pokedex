@@ -1,15 +1,14 @@
 package com.ogzkesk.data.mapper
 
-import com.ogzkesk.core.base.Mapper
-import com.ogzkesk.core.ext.capitalize
-import com.ogzkesk.core.model.PokemonsModel
-import com.ogzkesk.core.model.ResultModel
+import com.ogzkesk.common.base.Mapper
+import com.ogzkesk.common.ext.capitalize
+import com.ogzkesk.common.model.PokemonsModel
+import com.ogzkesk.common.model.ResultModel
 import com.ogzkesk.data.remote.dto.PokemonsDTO
 import com.ogzkesk.data.remote.dto.ResultDTO
 import com.ogzkesk.data.util.Constants.MAP_IMAGE_SUFFIX
 import com.ogzkesk.data.util.Constants.MAP_IMAGE_URL
 import com.ogzkesk.data.util.Constants.MAP_NO_PREFIX
-import java.util.Locale
 import javax.inject.Inject
 
 

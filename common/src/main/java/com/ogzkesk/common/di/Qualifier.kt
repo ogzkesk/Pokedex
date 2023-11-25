@@ -1,4 +1,4 @@
-package com.ogzkesk.core.di
+package com.ogzkesk.common.di
 
 import javax.inject.Qualifier
 

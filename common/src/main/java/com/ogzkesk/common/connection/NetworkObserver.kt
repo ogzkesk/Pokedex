@@ -1,4 +1,4 @@
-package com.ogzkesk.core.connection
+package com.ogzkesk.common.connection
 
 import android.content.Context
 import android.net.ConnectivityManager

@@ -2,8 +2,8 @@ package com.ogzkesk.pokedex.details
 
 import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
-import com.ogzkesk.core.model.PokemonModel
-import com.ogzkesk.core.util.Resource
+import com.ogzkesk.common.model.PokemonModel
+import com.ogzkesk.common.util.Resource
 import com.ogzkesk.data.repository.PokedexRepository
 import com.ogzkesk.details.DetailsEvent
 import com.ogzkesk.details.DetailsViewModel

@@ -1,4 +1,4 @@
-package com.ogzkesk.core.base
+package com.ogzkesk.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

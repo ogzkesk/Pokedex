@@ -1,12 +1,12 @@
-package com.ogzkesk.core.ext
+package com.ogzkesk.common.ext
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.ogzkesk.core.base.Mapper
-import com.ogzkesk.core.util.Resource
+import com.ogzkesk.common.base.Mapper
+import com.ogzkesk.common.util.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow

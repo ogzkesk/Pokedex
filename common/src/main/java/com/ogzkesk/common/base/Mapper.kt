@@ -1,4 +1,4 @@
-package com.ogzkesk.core.base
+package com.ogzkesk.common.base
 
 interface Mapper<I, O> {
 

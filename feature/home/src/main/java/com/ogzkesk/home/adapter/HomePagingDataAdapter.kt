@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
-import com.ogzkesk.core.model.ResultModel
+import com.ogzkesk.common.model.ResultModel
 import com.ogzkesk.home.databinding.RvItemCardBinding
 
 class HomePagingDataAdapter : PagingDataAdapter<ResultModel, PagingViewHolder>(DiffUtil) {

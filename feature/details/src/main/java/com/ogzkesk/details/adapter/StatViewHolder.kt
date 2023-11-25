@@ -2,7 +2,7 @@ package com.ogzkesk.details.adapter
 
 import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.RecyclerView
-import com.ogzkesk.core.model.PokemonStatsModel
+import com.ogzkesk.common.model.PokemonStatsModel
 import com.ogzkesk.details.databinding.LayoutStatBinding
 
 class StatViewHolder(private val binding: LayoutStatBinding) :

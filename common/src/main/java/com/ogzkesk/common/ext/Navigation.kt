@@ -1,4 +1,4 @@
-package com.ogzkesk.core.ext
+package com.ogzkesk.common.ext
 
 import androidx.annotation.StringRes
 import androidx.navigation.NavController

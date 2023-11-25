@@ -1,6 +1,6 @@
 package com.ogzkesk.pokedex.home
 
-import com.ogzkesk.core.model.ResultModel
+import com.ogzkesk.common.model.ResultModel
 
 internal object HomeTestUtils {
 
