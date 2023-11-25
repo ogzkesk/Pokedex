@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import com.ogzkesk.core.base.Mapper
 import com.ogzkesk.core.util.Resource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
@@ -20,6 +19,17 @@ import retrofit2.HttpException
 import java.io.IOException
 
 private const val CONNECTION_ERROR = "Please check your internet connection"
+
+fun <I, O> safeApiCall(
+    dispatcher: CoroutineDispatcher,
+    mapper: Mapper<I, O>,
+    apiCall: suspend () -> I,
+): Flow<Resource<O>> {
+    return apiCall
+        .asFlow()
+        .flowOn(dispatcher)
+        .asResource(mapper)
+}
 
 fun <I, O> Flow<I>.asResource(mapper: Mapper<I, O>): Flow<Resource<O>> {
     return map<I, Resource<O>> { Resource.Success(mapper(it)) }
@@ -41,16 +51,17 @@ fun <I, O> Flow<I>.asResource(mapper: Mapper<I, O>): Flow<Resource<O>> {
         }
 }
 
-fun <I, O> safeApiCall(
+
+fun <T> safeApiCall(
     dispatcher: CoroutineDispatcher,
-    mapper: Mapper<I, O>,
-    apiCall: suspend () -> I,
-): Flow<Resource<O>> {
+    apiCall: suspend () -> T,
+): Flow<Resource<T>> {
     return apiCall
         .asFlow()
         .flowOn(dispatcher)
-        .asResource(mapper)
+        .asResource()
 }
+
 
 fun <T> Flow<T>.asResource(): Flow<Resource<T>> {
     return map<T, Resource<T>> { Resource.Success(it) }
@@ -72,15 +83,6 @@ fun <T> Flow<T>.asResource(): Flow<Resource<T>> {
         }
 }
 
-fun <T> safeApiCall(
-    dispatcher: CoroutineDispatcher,
-    apiCall: suspend () -> T,
-): Flow<Resource<T>> {
-    return apiCall
-        .asFlow()
-        .flowOn(dispatcher)
-        .asResource()
-}
 
 inline fun <F : Fragment, T : Any?> F.collectFlowWithLifeCycle(
     flow: Flow<T>,

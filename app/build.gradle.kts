@@ -52,27 +52,24 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
+    implementation(project(":common"))
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":feature:home"))
     implementation(project(":feature:details"))
 
-
     implementation(libs.bundles.androidx)
     implementation(libs.bundles.lifecycle)
     implementation(libs.bundles.coroutines)
-
-    implementation(libs.material)
     implementation(libs.androidx.splash)
+    implementation(libs.material)
+    implementation(libs.androidx.paging)
+    implementation(libs.androidx.paging.common)
     implementation(libs.timber)
     implementation(libs.hilt)
-
     kapt(libs.hilt.compiler)
 
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso)
-    testImplementation(libs.junit)
-
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.test)
 
 }

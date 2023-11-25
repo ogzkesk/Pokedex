@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
-    id("kotlin-parcelize")
 }
 
 android {
@@ -41,7 +40,7 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
+    implementation(project(":common"))
     implementation(project(":domain"))
 
     implementation(libs.bundles.androidx)
@@ -55,11 +54,6 @@ dependencies {
     implementation(libs.coil.svg)
     implementation(libs.retrofit)
     implementation(libs.androidx.paging)
-
-
     kapt(libs.hilt.compiler)
 
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso)
-    testImplementation(libs.junit)
 }

@@ -25,7 +25,8 @@ class HomePagingSource @Inject constructor(
             val position = params.key ?: 0
             val pageSize = params.loadSize
 
-            val items = fetchPokemons(position, pageSize).results
+            val items = fetchPokemons(position, pageSize)
+                .results
                 .sortedBy { if(sortType == SortType.NAME) it.name else it.no }
                 .filter { it.name.contains(other = query,ignoreCase = true) }
 

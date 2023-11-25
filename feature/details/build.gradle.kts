@@ -40,7 +40,7 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
+    implementation(project(":common"))
     implementation(project(":domain"))
 
     implementation(libs.bundles.androidx)
@@ -53,10 +53,6 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.coil)
     implementation(libs.coil.svg)
-
     kapt(libs.hilt.compiler)
 
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso)
-    testImplementation(libs.junit)
 }

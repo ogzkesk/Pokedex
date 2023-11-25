@@ -38,8 +38,7 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
-
+    implementation(project(":common"))
     implementation(libs.bundles.coroutines)
     implementation(libs.bundles.room)
     implementation(libs.bundles.retrofit)

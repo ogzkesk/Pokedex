@@ -18,6 +18,6 @@ rootProject.name = "Pokedex"
 include(":app")
 include(":data")
 include(":domain")
-include(":core")
+include(":common")
 include(":feature:home")
 include(":feature:details")
