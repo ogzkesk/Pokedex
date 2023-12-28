@@ -6,17 +6,6 @@
     </a>
 </div>
 
-### About
-Finishing project of 2023 Pazarama Bootcamp.
-Pokedex demonstrates modern Android development with Hilt, Coroutines, Flow, ViewModel, and Material Design based on MVVM architecture.
-Uses <a href="https://pokeapi.co">Pokeapi.co</a> API
-
-## Screenshots
-<div align="center">
-  <img src="assets/home_screen.png" width="270">
-  <img src="assets/detail_screen.png" width="270">
-</div>
-
 
 ### Architecture
 MVVM Multi-Module Architecture by Layer
